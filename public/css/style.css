@@ -1,0 +1,43 @@
+body {
+  width: 90%;
+  margin: 0 auto;
+  color: #333;
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
+section p {
+  text-align: justify;
+}
+
+svg {
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+pre {
+  border: 1px solid #ccc;
+}
+
+.overlay {
+   background:transparent; 
+   position:relative; 
+   width:100%;
+   height:100%;
+   top:100%;
+   margin-top:100%;
+}
