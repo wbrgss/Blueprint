@@ -9,6 +9,6 @@ app.use('/', router);
 app.use(express.static(__dirname + '/public'));
 
 //start server
-app.listen(port, function () {
+app.listen(process.env.PORT || port, function () {
     console.log('app started');
 })
