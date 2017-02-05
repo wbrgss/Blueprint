@@ -1,0 +1,8 @@
+{
+  "name": "Blueprint",
+  "description": "A McGill curriculum visualiser",
+  "repository": "",
+  "logo": "",
+  "keywords": ["node", "express", "blueprint"],
+  "image": "heroku/nodejs"
+}
