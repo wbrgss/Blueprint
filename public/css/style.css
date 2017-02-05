@@ -1,7 +1,5 @@
 body {
-  width: 90%;
-  margin: 0 auto;
-  color: #333;
+  color: #fff;
   font-weight: 300;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
 }
@@ -40,4 +38,94 @@ pre {
    height:100%;
    top:100%;
    margin-top:100%;
+}
+
+#major-select {
+    position: fixed;
+    top: 20px;
+    left: 450px;
+}
+
+.bootstrap-select.majors {
+    position: fixed;
+    top: 80px;
+    left: 450px;
+    z-index: 1000;
+}
+
+.bootstrap-select.ranks {
+    position: fixed;
+    top: 20px;
+    left: 450px;
+    z-index: 1001;
+}
+
+/* Bootstrap Overrides */
+
+.btn {
+  border: 2px solid white;
+  border-radius: 0px;
+  font-weight: 300;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    text-shadow: none;
+}
+
+.btn-default:hover {
+    color: #ccc;
+    background-color: transparent;
+    border-color: #ccc;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #2c5197;
+    border-color: #ccc;
+} 
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder {
+  color: #fff;
+}
+
+.dropdown-menu {
+    border: 1px solid #fff;
+    border-radius: 0px;
+    background-color: #2C5197;
+}
+
+.form-control {
+  background-color: #2C5197;
+  border: 1px solid #fff;
+  border-radius: 0px;
+  color: #fff;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    color: #000;
+    background-color: #fff;
+    background-image: none;
+}
+
+.dropdown-menu>li>a {
+  color: #fff;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  background-image: none;
+  background-color: #fff;
+}
+
+.bootstrap-select.btn-group .no-results {
+  background: #fff;
+  color: #000;
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
 }

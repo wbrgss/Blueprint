@@ -3,13 +3,13 @@
   <head>
     <title>BluePrint</title>
     <!-- Latest compiled and minified CSS -->
-
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/application.css">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/tipsy.css">
+
+    <link rel="stylesheet" href="css/style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
@@ -49,19 +49,20 @@
 				  </fieldset>
 			</form>
 
+
+			<select id="major-select" class="selectpicker majors" data-live-search="true">
+				<option value="Bachelor of Science (B.Sc.) - Major Computer Science (63 credits)" disabled hidden selected>Program</option>
+				<option value="Bachelor of Science (B.Sc.) - Major Computer Science (63 credits)">Bachelor of Science (B.Sc.) - Major Computer Science (63 credits)</option>
+			</select>
+
+			<select class="selectpicker ranks">
+				<option value="" selected disabled hidden>Graph Layout</option>
+				<option value="tight-tree">Neat</option>
+				<option value="longest-path">Longest Path</option>
+				<option value="network-simplex">Network Simplex</option>
+			</select>
+
         	<div class="graph" style="width: 100%; height: 100%">
-
-				<br>
-				
-<!-- 				<select class="selectpicker majors" data-live-search="true">
-					<option selected="selected">Bachelor of Science (B.Sc.) - Major Computer Science (63 credits)</option>
-				</select>
-
-				<select class="selectpicker ranks">
-					<option selected="selected">tight-tree</option>
-					<option>longest-path</option>
-					<option>network-simplex</option>
-				</select> -->
 				
 
 			    <style id="css">
