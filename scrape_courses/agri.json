@@ -1,0 +1,28 @@
+[
+[
+{"code": "120", "cid": "AGRI 120", "title": "Exobiospheres", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "410d2", "cid": "AGRI 410d2", "title": "2 Agrology Internship", "creqs": [], "preqs": ["AGRI 410D1"], "subject": "AGRI"},
+{"code": "410d1", "cid": "AGRI 410d1", "title": "1 Agrology Internship", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "435", "cid": "AGRI 435", "title": "Soil and Water Quality Management", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "430", "cid": "AGRI 430", "title": "Professional Practice in Agrology", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "411", "cid": "AGRI 411", "title": "Global Issues on Development, Food and Agriculture", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "382", "cid": "AGRI 382", "title": "Special Topics: Agricultural Sciences 3", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "381", "cid": "AGRI 381", "title": "Special Topics: Agricultural Sciences 2", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "380", "cid": "AGRI 380", "title": "Special Topics: Agricultural Sciences ", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "340", "cid": "AGRI 340", "title": "Principles of Ecological Agriculture", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "330", "cid": "AGRI 330", "title": "Agricultural Legislatio", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "325", "cid": "AGRI 325", "title": "Sustainable Agriculture and Food Security", "creqs": [], "preqs": ["AGEC 200"], "subject": "AGRI"},
+{"code": "310", "cid": "AGRI 310", "title": "Internship in Agriculture/Environment", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "215", "cid": "AGRI 215", "title": "Agro-Ecosystems Field Course", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "196", "cid": "AGRI 196", "title": "Freshman Seminar 2 (", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "210", "cid": "AGRI 210", "title": "Agro-Ecological History", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "195", "cid": "AGRI 195", "title": "Freshman Seminar 1 (", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "452", "cid": "AGRI 452", "title": "Water Resources in Barbados", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "490", "cid": "AGRI 490", "title": "Agri-Food Industry Project", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "493", "cid": "AGRI 493", "title": "International Project Management", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "550", "cid": "AGRI 550", "title": "Sustained Tropical Agriculture", "creqs": [], "preqs": ["HISP 218", "MATH 203", "AEMA 310"], "subject": "AGRI"},
+{"code": "519", "cid": "AGRI 519", "title": "Sustainable Development Plans", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "499", "cid": "AGRI 499", "title": "Agricultural Development Internship", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "510", "cid": "AGRI 510", "title": "Professional Practice", "creqs": [], "preqs": [], "subject": "AGRI"},
+{"code": "498", "cid": "AGRI 498", "title": "Agricultural Development Research", "creqs": [], "preqs": [], "subject": "AGRI"}
+]
