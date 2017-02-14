@@ -1,58 +1,73 @@
 //SETTINGS
 
+// API Key for read-only data
 var API_KEY = "bM0m3C6DBipbAVWbd6EcBy9INiShTN_t";
-// we can make the db account read only
 
-//
+//default program
 var program = "Bachelor of Science (B.Sc.) - Major Computer Science (63 credits)"
+
+//listed program requirements global variable
 var courses = {};
+
+//course history
 var coursesTaken = {};
 
+//graph layout algo
 var rank = "tight-tree"
 
+//initialize (get data, draw graph)
 function init() {
 
   getCourses(program);
   getPreqs(courses);
   drawGraph();
 
+  //set zoom view level
   zoomOut();
 
-
-  $( ".spinner" ).hide();
+  //loading done
+  $('#spin1').hide();
 }
 
+// a new program is selected
+// fetch new data 
 function newProgram() {
-
-  $('.spinner').show();
 
   zoomIn();
 
   init();
 
+  $('#spin2').hide();
+
 }
 
+// new graph view is selected
+// same data, new render
 function newRank() {
 
-  $( ".spinner" ).show();
   zoomIn();
 
   drawGraph();
 
   zoomOut();
 
-  $( ".spinner" ).hide();
+  $('#spin2').hide();
 
 }
 
 
+// get program courses and course history
 function getCourses(program) {
 
-  $('.spinner').show();
+  // loading
+  $('#spin1').show();
 
+  // mongo db MLab API query
   var query = "{\"programs\":{\"$in\":[\"" + program + "\"]}}"
 
+  // get listed requirements for requested program
   $.ajax({
+    // don't want to asyncronously render graph without data
     async: false,
     dataType: "json",
     url: "https://api.mlab.com/api/1/databases/bluetest/collections/courses3?q=" + query + "&apiKey=" + API_KEY,
@@ -62,31 +77,36 @@ function getCourses(program) {
     }
   });
 
-    $.ajax({
-      async: false,
-      global: false,
-      dataType: "json",
-      url: "user_details/user-1.json",
-      success: function(userCourses) {
-        coursesTaken = userCourses;
-      }
-    });
+  // get user course history
+  // TODO: user minerva API
+  $.ajax({
+    async: false,
+    global: false,
+    dataType: "json",
+    url: "user_details/user-1.json",
+    success: function(userCourses) {
+      coursesTaken = userCourses;
+    }
+  });
 
 }
 
-
+// recursively get dependencies (prerequisites)
 function getPreqs(nodes) {
 
+  // all prereqs
   var ids = $.map(nodes, function(val) { return val.preqs; });
+  // unique prereqs in JSON
   var uids = JSON.stringify(_.uniq(ids));
 
+  // course IDS
   var cids = _.map(courses, 'cid');
   var ucids = JSON.stringify(_.uniq(cids));
 
+  // base case
   if (_.isEmpty(nodes)) {
     return "done";
   }
-
   else {
     var ids = $.map(nodes, function(val) { return val.preqs; });
     var uids = JSON.stringify(_.uniq(ids));
@@ -94,24 +114,26 @@ function getPreqs(nodes) {
     var cids = _.map(courses, 'cid');
     var ucids = JSON.stringify(_.uniq(cids));
 
+    // MLab query: union of unique prereqs and other courses in DB
     var query = "{ $and: [{\"cid\":{\"$in\":" + uids + "} }, {\"cid\":{\"$nin\":" + ucids + "}} ] }"
 
+    // get courses with query
     $.ajax({
     async: false,
     dataType: "json",
     url: "https://api.mlab.com/api/1/databases/bluetest/collections/courses3?q=" + query + "&apiKey=" + API_KEY,
     success: function(preqs) {
-           //singles = data;
            nodes = preqs;
         }
     });
 
+    // add to global var nodes
     courses = courses.concat(nodes);
 
+    // recurse
     return getPreqs(nodes);
 
   }
-
 }
 
 function drawGraph() {
@@ -123,16 +145,15 @@ function drawGraph() {
 
   for(var k in courses) {
     if (courses[k] !== undefined) {
-      console.log(courses[k]);
-      //change the link to a url param return from scraper (i.e. add to scraper)
-
+      // TODO: change the link to a url param return from scraper (i.e. add to scraper)
       var sclass = "l-" + courses[k].code.charAt(0) + "00";
+
+      // add course history
       for(var t in coursesTaken) {
         if(courses[k].subject == coursesTaken[t].subject && courses[k].code == coursesTaken[t].code) {
-          //console.log('course taken: ');
-          //console.log(coursesTaken[t]);
 
           var grade = coursesTaken[t].grade;
+          // change +/- format
           if( grade == 'A-' )
             grade = 'Aminus';
           else if(grade == 'B+')
@@ -147,6 +168,7 @@ function drawGraph() {
         }
       }
 
+      //set metadata
       g.setNode(courses[k].cid,  { label: "<a href=https://www.mcgill.ca/study/2016-2017/courses/" + courses[k].subject + "-" + courses[k].code + " target=\"_blank\">" + courses[k].cid + "</a>", labelType: "html",class: sclass , rx: 5, ry: 5, title: courses[k].title, cid: courses[k].cid, terms: courses[k].terms, instructors: courses[k].instructors, credits: courses[k].credits });
     }
   }
@@ -154,17 +176,14 @@ function drawGraph() {
   svg = d3.select("svg"),
       inner = svg.select("g");
 
-  // Set up edges, no special attributes.
+  // Set up edges
   for(var k in courses) {
     if (courses[k].preqs.length !== 0) {
-      //console.log(roots[k].preqs);
       for (var j in courses[k].preqs) {
+        // if prereqs exist in scope, render edge
         if (_.some(courses, ['cid', courses[k].preqs[j]])) {
-          //console.log(courses[k].preqs[j]);
-          //console.log(courses[k].cid + " requires " + courses[k].preqs[j]);
           g.setEdge(courses[k].preqs[j],courses[k].cid, { class:"l-" + courses[k].code.charAt(0) + "00"})
         }
-        //g.setNode(roots[k].cid,  { label: roots[k].cid,        class: "type-NP" });
       }
     }
   }
@@ -173,15 +192,16 @@ function drawGraph() {
   // Create the renderer
   var render = new dagreD3.render();
 
-  // Run the renderer. This is what draws the final graph.
+  // Run the renderer
   render(inner, g);
 
+  //set zoom funtionality
   zoom = d3.behavior.zoom().on("zoom", function() {
     inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
   });
   svg.call(zoom);
 
-  // Simple function to style the tooltip for the given node.
+  // Tipsy tooltip styling
   var styleTooltip = function(title, cid, terms, instructors, credits) {
     return '<div class="popup"><p class="title">  <span>Title</span> : ' + title + '</p><p class="cid">  <span>Code</span> : ' + cid + '</p><p class="terms">  <span>Terms</span> : ' + terms + '</p><p class="instructors">  <span>Instructors</span> : ' + instructors + '</p><p class="credits">  <span>Credits</span> : ' + credits + '</p><div>';
   };
@@ -193,6 +213,9 @@ function drawGraph() {
 }
 
 function zoomIn () {
+
+    $('#spin2').show();
+
   // Center the graph up
   var initialScale = 1;
   zoom
@@ -215,14 +238,17 @@ function zoomOut () {
 
 }
 
+// detect select change
 $('.majors').on('change', function(event) {
+  $('#spin2').show();
   program = this.value;
   newProgram();
 });
 
 $('.ranks').on('change', function(event) {
+  $('#spin2').show();
   rank = this.value;
-  newProgram();
+  newRank();
 });
 
 init();

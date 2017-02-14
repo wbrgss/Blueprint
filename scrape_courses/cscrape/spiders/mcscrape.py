@@ -44,12 +44,8 @@ class McScrape(scrapy.Spider):
             item['instructors'] = re.search(r'.*?\: (.*)', response.xpath('//p[@class="catalog-instructors"]/text()').extract_first()).group(1).strip()
 
             #regex the whole sidebar list of programs 
-            #money
-            #item['programs'] = [m.group(1) for m in (re.search(r'([^/]+$)', l) for l in response.css('.views-field-field-credit-hours a::attr(href)').extract()) if m]
             item['programs'] = response.css('.views-field-field-credit-hours a::text').extract()
-            
-            #programs = response.css('.views-field-field-credit-hours a::text').extract()
-            #for p in programs
+        
 
 
             item['preqs'] = response.xpath('//ul[@class="catalog-notes"]/li/p[contains(., \'Prerequisite\')]/a/text()').extract()
